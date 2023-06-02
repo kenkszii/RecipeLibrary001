@@ -37,10 +37,13 @@ class SignUp(Resource):
     data=request.get_json()
 
     username=data.get("username")
-    db_user=User.query.filter_by(username=username).first()
+    email=data.get("email")
+    db_username=User.query.filter_by(username=username).first()
+    db_usermail=User.query.filter_by(email=email).first()
 
-    if db_user is not None:
-      return {"message": f"User with username {username} already exists"}, 400
+
+    if db_username or db_usermail:
+      return {"message": f"User with username {username} or email {email} already exists"}, 400
 
     
     new_user=User(

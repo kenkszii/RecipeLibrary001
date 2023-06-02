@@ -1,0 +1,15 @@
+
+.auth{
+    background-color: rgb(65, 57, 48);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.containerauth{
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 5px;
+    width: 25%;
+}
