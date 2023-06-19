@@ -7,7 +7,6 @@ import { useAuth } from '../../static/js/useAuth';
 import fetchAPI from '../../static/js/fetchAPI';
 
 function UpdateRecipe(props) {
-  const { setRecipes } = props;
   const [showModal, setShowModal] = useState(false);
   const { register, getValues, formState: { errors } } = useForm();
   const { authorize } = useAuth();

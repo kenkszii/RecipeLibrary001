@@ -37,7 +37,7 @@ function ViewRecipe(props) {
         <Button variant="secondary" onClick={closeModal}>
           Close
         </Button>
-        <UpdateRecipe recipe={props.recipe} setRecipe={props.setRecipe}/>
+        <UpdateRecipe recipe={props.recipe}  updateRecipes={props.updateRecipes}/>
       </Modal.Footer>
     </Modal>
     </>

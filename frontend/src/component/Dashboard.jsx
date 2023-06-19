@@ -63,9 +63,9 @@ const Dashboard = () => {
                 <Card.Title>{recipe.title}</Card.Title>
                 <Card.Text>{recipe.description}</Card.Text>
 
-                <ViewRecipe title={recipe.title} description={recipe.description} recipe={recipe.id} setRecipes={setRecipes}/>
+                <ViewRecipe title={recipe.title} description={recipe.description} recipe={recipe.id} updateRecipes={updateRecipes}/>
                 <DeleteRecipe recipe={recipe.id} updateRecipes={updateRecipes} />
-                <UpdateRecipe recipe={recipe.id} setRecipes={setRecipes}/>
+                <UpdateRecipe recipe={recipe.id}  updateRecipes={updateRecipes}/>
 
               </Card.Body>
             </Card>
