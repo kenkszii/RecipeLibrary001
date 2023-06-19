@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+import {Button, Form} from "react-bootstrap";
 
-import fetchAPI from "../static/js/FectchApi";
+
+import fetchAPI from "../static/js/fetchAPI";
 import { useAuth } from "../static/js/useAuth";
 
 
@@ -22,25 +22,22 @@ function Login() {
       setProcessingRequest(true);
       unauthorize();
 
-      fetchAPI("/auth/login", "POST", form_data, [201, 401]) 
+      fetchAPI("/auth/login", "POST", form_data, [200, 401]) 
         .then(
           function (response) {
             if (response) {
               const { data, status } = response;
-              console.log(data);
-              console.log(form_data);
-
-              if (status === 201) {
-                signIn(data["message"]);
+              if (status === 200) {
+                signIn(data);
               };
             };
           }
         )
-        .finally(
-          function () {
-            setProcessingRequest(false);
-          }
-        );
+        // .finally(
+        //   function () {
+        //     setProcessingRequest(false);
+        //   }
+        // );
     } else {
       navigate("/dashboard");
     };
@@ -53,7 +50,7 @@ function Login() {
 
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Username</Form.Label>
-            <Form.Control type="email" placeholder="Username"
+            <Form.Control type="text" placeholder="Username"
               {...register("username", { required: true, maxLength: 25 })}
             />
           </Form.Group>

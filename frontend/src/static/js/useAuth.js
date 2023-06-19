@@ -2,46 +2,7 @@ import { useNavigate, Navigate } from "react-router-dom";
 import swal from "sweetalert2";
 import axios from "axios";
 
-
-function authManager() {
-  const key = "BITE_EXPRESS_TOKEN_AUTH_KEY";
-
-  function save(credentials) {
-    localStorage.setItem(key, JSON.stringify(credentials));
-  };
-
-
-  function load() {
-    const item = localStorage.getItem(key);
-
-    if (!item) {
-      return [false, null];
-    } else {
-      return [true, JSON.parse(item)];
-    }
-  };
-
-
-  function destroy() {
-    localStorage.removeItem(key);
-  };
-
-  
-  function update(newCredentials) {
-    const [success, savedCredentials] = load();
-
-    if (success && savedCredentials) {
-      let credentials = savedCredentials;
-
-      Object.assign(credentials, newCredentials);
-
-      save(credentials);
-    };
-  };
-  
-
-  return {save, load, destroy, update};
-}
+import { useLocalStorage } from "./useLocalStorage.js";
 
 
 function Auth(use_navigate=null) {
@@ -52,11 +13,16 @@ function Auth(use_navigate=null) {
   let isLoading = true;
 
   const navigate = use_navigate;
-  const {load, save, destroy, update} = authManager();
-  const [success, savedCredentials] = load();
+  const key = "USER_TOKEN_AUTH_KEY";
+  
+  const {load, save, destroy, update} = useLocalStorage(key);
+  const savedCredentials = load();
 
-  if (success && savedCredentials) {
+  if (savedCredentials) {
+    const { access_token } = savedCredentials;
+    save({ access_token });
     credentials = savedCredentials;
+    
     isAuthenticated = true;
   };
  
@@ -69,7 +35,7 @@ function Auth(use_navigate=null) {
 
     new swal({
       title: "Success",
-      text: "your Account is signed in successfully.",
+      text: "Account signed in successfully.",
       icon: "success",
     });
 
@@ -104,7 +70,7 @@ function Auth(use_navigate=null) {
 
       new swal({
         title: "Success",
-        text: "Your Account is signed out successfully.",
+        text: "Account signed out successfully.",
         icon: "success",
       });
     } else {
@@ -124,6 +90,7 @@ function Auth(use_navigate=null) {
         ? credentials["refresh_token"]
         : credentials
       }`
+      
     );
   };
 
@@ -152,4 +119,3 @@ function useAuth() {
 
 
 export { Auth, useAuth };
-

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { Auth } from "./useAuth.js";
-import fetchAPI from "./FectchApi.js";
+import fetchAPI from "./fetchAPI.js";
 
 
 axios.defaults.baseURL = "http://127.0.0.1:5000";
