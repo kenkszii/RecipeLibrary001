@@ -8,7 +8,7 @@ import Swal from 'sweetalert2'
 
 
 function SignUp() {
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
 
   const submitForm = (data) => {
@@ -121,7 +121,7 @@ function SignUp() {
 
           <Form.Group>
             <small>
-              Already have an account, <Link to="/login">Log In</Link>
+              Already have an account, <Link to="/login" className="signup">Log In</Link>
             </small>
           </Form.Group>
         </Form>

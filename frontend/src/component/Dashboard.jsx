@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Container, Row, Col, Button } from 'react-bootstrap';
+import { Card, Row, Col, Button } from 'react-bootstrap';
 import fetchAPI from '../static/js/fetchAPI';
 import { useAuth } from '../static/js/useAuth';
 import swal from 'sweetalert2';
@@ -45,14 +45,22 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <Container>
-      <h1>My Recipe Dashboard</h1>
-      <CreateRecipe setRecipes={setRecipes}/>
+    <div className="bgdashboard">
+      <h1 className="bsc">
+        My Recipe Dashboard
+        <Button variant="danger" className='ms-3 home'>
+        <a href="/">Home</a>
+
+      </Button>
+      </h1>
+      <CreateRecipe setRecipes={setRecipes} />
       <Button variant="danger" className='ms-3' onClick={signOut} >
         Logout
       </Button>
+      
 
       <hr />
+      
 
       <Row>
         {recipes.map((recipe) => (
@@ -63,9 +71,9 @@ const Dashboard = () => {
                 <Card.Title>{recipe.title}</Card.Title>
                 <Card.Text>{recipe.description}</Card.Text>
 
-                <ViewRecipe title={recipe.title} description={recipe.description} recipe={recipe.id} updateRecipes={updateRecipes}/>
+                <ViewRecipe title={recipe.title} description={recipe.description} recipe={recipe.id} updateRecipes={updateRecipes} />
                 <DeleteRecipe recipe={recipe.id} updateRecipes={updateRecipes} />
-                <UpdateRecipe recipe={recipe.id}  updateRecipes={updateRecipes}/>
+                <UpdateRecipe recipe={recipe.id} updateRecipes={updateRecipes} />
 
               </Card.Body>
             </Card>
@@ -76,7 +84,7 @@ const Dashboard = () => {
 
 
 
-    </Container>
+    </div>
   );
 };
 

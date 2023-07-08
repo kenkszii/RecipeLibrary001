@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import {Button, Form} from "react-bootstrap";
@@ -8,18 +8,18 @@ import fetchAPI from "../static/js/fetchAPI";
 import { useAuth } from "../static/js/useAuth";
 
 
-import "../static/style.css"
+
 
 function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
   const { isAuthenticated, signIn, unauthorize } = useAuth();
-  const [isProcessingRequest, setProcessingRequest] = useState(false);
+  // const [isProcessingRequest, setProcessingRequest] = useState(false);
 
 
   function handleSignIn(form_data) {
     if (!isAuthenticated) {
-      setProcessingRequest(true);
+      // setProcessingRequest(true);
       unauthorize();
 
       fetchAPI("/auth/login", "POST", form_data, [200, 401]) 
@@ -78,7 +78,7 @@ function Login() {
         </Form>
 
         <Form.Group>
-          <small>Do not have an account? <Link to='/signup'>Signup here</Link></small>
+          <small>Do not have an account? <Link to='/signup' className="signup">Signup here</Link></small>
         </Form.Group>
       </div>
     </div>
